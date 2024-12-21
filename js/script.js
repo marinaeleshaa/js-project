@@ -188,21 +188,22 @@ function fillInCart(product) {
                       </div>
                       <!-- item in cart -->`;
 }
-if(addedItems){
-  addedItems.map((item)=>{
-    cartPopUp.innerHTML += fillInCart(item)
-  })
+if (addedItems) {
+  addedItems.map((item) => {
+    cartPopUp.innerHTML += fillInCart(item);
+  });
   // badge.innerHTML = addedItems.length
-} else{
-  cartPopUp.innerHTML = "no items yet"
+} else {
+  cartPopUp.innerHTML = "no items yet";
 }
-if (localStorage.getItem("userName")) {
-  function addToCart(id) {
+function addToCart(id) {
+  if (localStorage.getItem("userName")) {
     let chosenItem = products.find((item) => item.id === id);
     cartPopUp.innerHTML += fillInCart(chosenItem);
     addedItems = [...addedItems, chosenItem];
     localStorage.setItem("productsInCart", JSON.stringify(addedItems));
+  } else {
+    window.location = "login.html";
   }
-} else {
-  window.Location = "login.html";
 }
+
