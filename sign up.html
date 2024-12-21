@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="css/all.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="position-relative">
+    <header>
+      <nav class="navbar ">
+        <div class="container-fluid px-5">
+          <div class="d-flex align-items-center w-100 justify-content-start">
+            <!-- logo -->
+            <div class="">
+              <div>
+                <a class="navbar-brand" href="index.html">
+                  <img
+                    src="img/logo.png"
+                    alt="Logo"
+                    class=""
+                    style="width: 200px; height: 50px"
+                  />
+                </a>
+              </div>
+            </div>
+            <!-- end logo -->
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <section class="form-page">
+      <div class="container-fluid p-3 p-md-5">
+        <div
+          class="rounded-5 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 m-auto form p-3 shadow-lg bg-white"
+        >
+          <div
+            class="d-flex flex-column justify-content-center p-3 align-items-center gap-4"
+          >
+            <h1 class="mb-0">Sign Up</h1>
+            <span class="line"></span>
+            <!-- user name -->
+            <div class="position-relative w-100">
+              <input
+                type="text"
+                placeholder="User Name"
+                class="border-bottom border-0 w-100 ps-5 p-2 user-name"
+                required
+              />
+              <i
+                class="fa-solid fa-user position-absolute input-icon ms-2 fs-4"
+              ></i>
+            </div>
+            <!-- email -->
+            <div class="position-relative w-100">
+              <input
+                type="email"
+                placeholder="E-mail"
+                class="border-bottom border-0 w-100 ps-5 p-2 e-mail"
+                required
+              />
+              <i
+                class="fa-solid fa-envelope position-absolute input-icon ms-2 fs-4"
+              ></i>
+            </div>
+            <!-- password -->
+            <div class="position-relative w-100">
+              <input
+                type="password"
+                placeholder="Password"
+                class="border-bottom border-0 w-100 ps-5 p-2 password"
+                required
+              />
+              <i
+                class="fa-solid fa-lock position-absolute input-icon ms-2 fs-4"
+              ></i>
+            </div>
+            <span class="text-capitalize me-4 fs-6 text-nowrap alert-msg"></span>
+            <a href="" class="col-12 "
+              ><button type="submit" class="btn w-100 sign-up">
+                Sign Up
+              </button></a
+            >
+            <a href="login.html" style="color: var(--med)"
+              >already have an account!
+              <span
+                style="color: var(--dark); text-decoration: underline"
+                class="ms-2"
+                >Log in</span
+              ></a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <script src="js/all.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/sign up.js"></script>
+  </body>
+</html>

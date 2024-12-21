@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="css/all.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar ">
+        <div class="container-fluid px-5">
+          <div class="d-flex align-items-center w-100 justify-content-center justify-content-md-start">
+            <!-- logo -->
+            <div>
+              <a class="navbar-brand" href="index.html">
+                <img
+                  src="img/logo.png"
+                  alt="Logo"
+                  class=""
+                  style="width: 200px; height: 50px"
+                />
+              </a>
+            </div>
+
+            <!-- end logo -->
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <section class="form-page">
+      <div class="container-fluid p-3 p-md-5">
+        <div
+          class="rounded-5 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 m-auto form p-3 shadow-lg bg-white"
+        >
+          <div
+            class="d-flex flex-column justify-content-center p-3 align-items-center gap-4"
+          >
+            <h1 class="mb-0">Login</h1>
+            <span class="line"></span>
+            <!-- user name -->
+            <div class="position-relative w-100">
+              <input
+                type="text"
+                placeholder="User Name"
+                class="border-bottom border-0 w-100 ps-5 p-2 user-name"
+              />
+              <i
+                class="fa-solid fa-user position-absolute input-icon ms-2 fs-4"
+              ></i>
+            </div>
+            <!-- user name -->
+            <!-- password -->
+            <div class="position-relative w-100">
+              <input
+                type="password"
+                placeholder="Password"
+                class="border-bottom border-0 w-100 ps-5 p-2 password"
+              />
+              <i
+                class="fa-solid fa-lock position-absolute input-icon ms-2 fs-4"
+              ></i>
+            </div>
+            <span
+              class="text-capitalize me-4 fs-6 text-nowrap alert-msg"
+            ></span>
+
+            <!-- login btn -->
+            <a href="" class="col-12"
+              ><button type="submit" class="btn w-100 Login">Login</button></a
+            >
+            <a href="sign up.html" style="color: var(--med)"
+              >don't have an account!
+              <span
+                style="color: var(--dark); text-decoration: underline"
+                class="ms-2"
+                >Sign Up</span
+              ></a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="js/all.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/login.js"></script>
+  </body>
+</html>

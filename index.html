@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <link rel="stylesheet" href="css/all.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="fixed-top w-100">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid px-3 px-md-5">
+          <!-- Logo -->
+          <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+            <a class="navbar-brand" href="index.html">
+              <img
+                src="img/logo.png"
+                alt="Logo"
+                style="width: 100%; height: 50px"
+              />
+            </a>
+          </div>
+          <!-- Toggler Button -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#toogle"
+            aria-controls="toogle"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <!-- Navbar Content -->
+          <div
+            class="collapse navbar-collapse align-items-center d-lg-flex justify-content-lg-between justify-content-center"
+            id="toogle"
+          >
+            <!-- user name after login -->
+            <div
+              class="mt-3 mt-lg-0 after-login user-out"
+              style="border-left: 2px solid var(--pop)"
+            >
+              <p
+                class="m-0 ms-0 ms-lg-3 text-capitalize fs-5 text-nowrap"
+                id="user-name"
+              ></p>
+            </div>
+            <!-- user name after login -->
+            <!-- Login & Sign Up -->
+            <div class="ms-auto">
+              <div class="d-flex gap-3 flex-column flex-lg-row">
+                <!-- search -->
+                <div class="row">
+                  <div class="d-flex">
+                    <input
+                      type="search"
+                      name=""
+                      id=""
+                      class="rounded border-0 p-2 mt-4 mt-lg-0 flex-grow-1"
+                      placeholder="Search"
+                    />
+                    <select
+                      name=""
+                      id=""
+                      class="ms-4 text-capitalize border-0 rounded mt-4 mt-lg-0"
+                    >
+                      <option value="" disabled selected hidden>
+                        fillter by
+                      </option>
+                      <option value="yes">category</option>
+                      <option value="no">color</option>
+                    </select>
+                  </div>
+                </div>
+                <!-- search -->
+                <div class="d-flex login-signUp gap-3">
+                  <a href="login.html">
+                    <button class="btn text-capitalize text-nowrap">
+                      login
+                    </button>
+                  </a>
+                  <a href="sign up.html">
+                    <button class="btn text-capitalize text-nowrap">
+                      sign up
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- After Login -->
+
+            <div
+              class="gap-4 align-items-center d-flex justify-content-between p-3 p-lg-0 ms-0 ms-lg-4"
+            >
+              <!-- cart -->
+              <div class="position-relative after-login user-out">
+                <button type="button" class="cart-icon">
+                  <i class="fa-solid fa-cart-shopping fs-4"></i>
+                </button>
+                <div class="position-absolute view-cart p-4 rounded">
+                  <div class="w-100">
+                    <div class="cart-preview d-flex flex-column overflow-scroll">
+                      <!-- item in cart -->
+                      <!-- <div class="d-flex justify-content-between p-2">
+                        <div class="d-flex justify-content-center align-items-center ">
+                          <img
+                            src="img/products/1.png"
+                            alt=""
+                            style="height: 70px"
+                            class="me-2"
+                          />
+                          <div>
+                            <h3 style="color: var(--dark);">laptop</h3>
+                            <p style="color: var(--med);">$200</p>
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center gap-2">
+                          <button class="btn">+</button>
+                          <input type="number" max="5" min="0" class="text-center border-0" style="width: 40px;">
+                          <button class="btn delete-btn">-</button>
+                        </div>
+                      </div> -->
+                      <!-- item in cart -->
+                    </div>
+                    <a href="">
+                      <button class="btn text-capitalize text-nowrap w-100">
+                        view all items
+                      </button></a
+                    >
+                  </div>
+                </div>
+              </div>
+              <!-- cart -->
+              <!-- Log Out Button -->
+              <a href="#" class="after-login user-out">
+                <button class="btn logout-btn text-capitalize text-nowrap">
+                  log out
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <section class="cover" style="height: 600px; margin-top: 60px">
+      <div class="container">
+        <div class="parent py-5">
+          <div class="col-10 col-md-6 py-5">
+            <div class="d-flex flex-column py-5">
+              <h1 class="text-capitalize" style="color: var(--dark)">
+                let's go!
+              </h1>
+              <p style="color: var(--med)">
+                "Your convenience, our priority! Explore a seamless shopping
+                experience at Larana Online Market. From the latest products to
+                exclusive deals, everything is just a click away. Enjoy secure
+                transactions, personalized recommendations, and swift
+                deliveries—all designed to make your online shopping journey
+                exceptional. Order now and discover the joy of hassle-free
+                shopping!"
+              </p>
+              <button class="btn col-6 col-md-5 col-lg-4 text-capitalize">
+                read more
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-5" style="margin-top: 60px">
+      <div class="container">
+        <div
+          class="row product-parent justify-content-lg-start justify-content-center"
+        >
+          <!-- product item -->
+          <div class="col-10 col-md-6 col-lg-3">
+            <div
+              class="card product-item position-relative overflow-hidden p-3 shadow border-0"
+            >
+              <div
+                class="img z-1 d-flex justify-content-center align-items-center position-relative h-100"
+              >
+                <img src="img/products/1.png" alt="" style="width: 100%" />
+              </div>
+              <div
+                class="content text-capitalize z-1 position-relative p-2 d-flex flex-column justify-content-center align-items-center"
+              >
+                <h3 style="color: var(--dark)">dell laptop</h3>
+                <p style="color: var(--med)">price : $200</p>
+                <button
+                  class="btn card-btn text-capitalize col-12 position-relative"
+                >
+                  add to cart
+                </button>
+              </div>
+              <div class="fav-icon position-absolute me-3 fs-1">
+                <i class="fa-regular fa-heart icon"></i>
+                <!-- <i class="fa-solid fa-heart"></i> -->
+              </div>
+            </div>
+          </div>
+          <!-- product item -->
+        </div>
+      </div>
+    </section>
+
+    <script src="js/all.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/user.js"></script>
+  </body>
+</html>
