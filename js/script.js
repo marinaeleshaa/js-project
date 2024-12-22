@@ -1,4 +1,4 @@
-// fill products
+// // fill products
 
 var productParent = document.querySelector(".product-parent");
 
@@ -14,7 +14,7 @@ let products = [
 
   {
     id: 2,
-    name: "note 20 ultra",
+    name: "airpods lite",
     price: 50,
     category: "airpods",
     url: "img/products/11.png",
@@ -121,10 +121,12 @@ function content(product) {
                 <p style="color: var(--med)">price : $${product.price}</p>
                 <button
                   class="btn card-btn text-capitalize col-12 position-relative"
-                  onClick="addToCart(${product.id})"
+                  data-id="${product.id}"
+                  onclick="addToCart(${product.id}, this)"
                 >
-                  add to cart
+                  Add to Cart
                 </button>
+
               </div>
               <div class="fav-icon position-absolute me-3 fs-1">
                 <i class="fa-regular fa-heart icon"></i>
@@ -145,7 +147,7 @@ function fillProducts() {
 
 fillProducts();
 
-// ///////////////////////////////////////////////
+// // ///////////////////////////////////////////////
 
 let cartIcon = document.querySelector(".cart-icon");
 let viewCart = document.querySelector(".view-cart");
@@ -183,27 +185,161 @@ function fillInCart(product) {
                         <div class="d-flex justify-content-center align-items-center gap-2">
                           <button class="btn">+</button>
                           <input type="number" max="5" min="0" class="text-center border-0" style="width: 40px;">
-                          <button class="btn delete-btn">-</button>
+                          <button class="btn delete-btn" onclick="removeFromCart(${product.id})">-</button>
                         </div>
                       </div>
-                      <!-- item in cart -->`;
+          <!-- item in cart -->`;
 }
-if (addedItems) {
-  addedItems.map((item) => {
-    cartPopUp.innerHTML += fillInCart(item);
-  });
-  // badge.innerHTML = addedItems.length
-} else {
-  cartPopUp.innerHTML = "no items yet";
+
+// Update cart preview
+function updateCart() {
+  cartPopUp.innerHTML = "";
+  if (addedItems.length > 0) {
+    addedItems.forEach((item) => {
+      cartPopUp.innerHTML += fillInCart(item);
+    });
+  } else {
+    cartPopUp.innerHTML = `<h5 class="text-capitalize text-center" style="color:var(--pop)">No items yet</h5>`;
+  }
 }
-function addToCart(id) {
+
+// function addToCart(id, buttonElement) {
+//   if (localStorage.getItem("userName")) {
+//     // Find chosen product
+//     let chosenItem = products.find((item) => item.id === id);
+
+//     // Update cart preview and localStorage
+//     cartPopUp.innerHTML += fillInCart(chosenItem);
+//     addedItems = [...addedItems, chosenItem];
+//     localStorage.setItem("productsInCart", JSON.stringify(addedItems));
+
+//     // Update button styles
+//     buttonElement.style.backgroundColor = "var(--pop)";
+//     buttonElement.innerHTML = "Added Successfully";
+//     buttonElement.disabled = true;
+//     buttonElement.style.border = "none";
+//     buttonElement.style.color = "var(--white)";
+
+//     // Save button state
+//     let buttonStates = JSON.parse(localStorage.getItem("buttonStates")) || {};
+//     buttonStates[id] = true; // Store the clicked state
+//     localStorage.setItem("buttonStates", JSON.stringify(buttonStates));
+//   } else {
+//     window.location = "login.html";
+//   }
+// }
+
+// function applyButtonStates() {
+//   const buttonStates = JSON.parse(localStorage.getItem("buttonStates")) || {};
+
+//   // Loop through all buttons with the `data-id` attribute
+//   document.querySelectorAll("button[data-id]").forEach((button) => {
+//     const id = button.getAttribute("data-id");
+
+//     if (buttonStates[id]) {
+//       // Apply saved state
+//       button.style.backgroundColor = "var(--pop)";
+//       button.innerHTML = "Added Successfully";
+//       button.disabled = true;
+//       button.style.border = "none";
+//       button.style.color = "var(--white)";
+//     }
+//   });
+// }
+
+// // Call this after rendering all products
+// applyButtonStates();
+
+// Fill products
+
+// ///////////////////////////////////////////////
+
+// Fill in cart
+// function fillInCart(product) {
+//   return `<!-- item in cart -->
+//                       <div class="d-flex justify-content-between p-2" data-id="${product.id}">
+//                         <div class="d-flex justify-content-center align-items-center ">
+//                           <img
+//                             src=${product.url}
+//                             alt=""
+//                             style="height: 70px"
+//                             class="me-2"
+//                           />
+//                           <div>
+//                             <h3 style="color: var(--dark);" class="item-title">${product.name}</h3>
+//                             <p style="color: var(--med);">$${product.price}</p>
+//                           </div>
+//                         </div>
+//                         <div class="d-flex justify-content-center align-items-center gap-2">
+//                           <button class="btn delete-btn" onclick="removeFromCart(${product.id})">Remove</button>
+//                         </div>
+//                       </div>
+//           <!-- item in cart -->`;
+// }
+
+
+
+// Add to cart
+function addToCart(id, buttonElement) {
   if (localStorage.getItem("userName")) {
     let chosenItem = products.find((item) => item.id === id);
-    cartPopUp.innerHTML += fillInCart(chosenItem);
-    addedItems = [...addedItems, chosenItem];
-    localStorage.setItem("productsInCart", JSON.stringify(addedItems));
+
+    if (!addedItems.some((item) => item.id === id)) {
+      addedItems = [...addedItems, chosenItem];
+      localStorage.setItem("productsInCart", JSON.stringify(addedItems));
+      updateCart();
+
+      buttonElement.style.backgroundColor = "var(--pop)";
+      buttonElement.style.color = "var(--white)";
+      buttonElement.innerHTML = "Added Successfully";
+      buttonElement.disabled = true;
+
+      let buttonStates = JSON.parse(localStorage.getItem("buttonStates")) || {};
+      buttonStates[id] = true;
+      localStorage.setItem("buttonStates", JSON.stringify(buttonStates));
+    }
   } else {
     window.location = "login.html";
   }
 }
 
+// Remove from cart
+function removeFromCart(id) {
+  addedItems = addedItems.filter((item) => item.id !== id);
+  localStorage.setItem("productsInCart", JSON.stringify(addedItems));
+  updateCart();
+
+  let buttonStates = JSON.parse(localStorage.getItem("buttonStates")) || {};
+  delete buttonStates[id];
+  localStorage.setItem("buttonStates", JSON.stringify(buttonStates));
+
+  let button = document.querySelector(`button[data-id="${id}"]`);
+  if (button) {
+    button.style.backgroundColor = "";
+    button.innerHTML = "Add to Cart";
+    button.disabled = false;
+  }
+}
+
+// Apply button states
+function applyButtonStates() {
+  const buttonStates = JSON.parse(localStorage.getItem("buttonStates")) || {};
+
+  document.querySelectorAll("button[data-id]").forEach((button) => {
+    const id = button.getAttribute("data-id");
+
+    if (buttonStates[id]) {
+      button.style.backgroundColor = "var(--pop)";
+      button.innerHTML = "Added Successfully";
+      button.disabled = true;
+    } else {
+      button.style.backgroundColor = "";
+      button.innerHTML = "Add to Cart";
+      button.disabled = false;
+    }
+  });
+}
+
+// Initial calls
+updateCart();
+applyButtonStates();
