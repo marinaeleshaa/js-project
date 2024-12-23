@@ -167,6 +167,11 @@ input::placeholder {
   min-width: 300px;
 }
 
+.badge{
+  background-color: var(--pop);
+  top: -10px;
+  right: -10px;
+}
 /* ///////////////////////////////////////////////////////////////////////////////////////////// */
 
 select {

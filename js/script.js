@@ -9,7 +9,7 @@ let products = [
     price: 180,
     category: "laptop",
     url: "img/products/2.png",
-    color: "black"
+    color: "silver"
   },
 
   {
@@ -18,7 +18,7 @@ let products = [
     price: 50,
     category: "airpods",
     url: "img/products/11.png",
-    color: "black"
+    color: "pink"
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ let products = [
     price: 370,
     category: "phone",
     url: "img/products/6.png",
-    color: "black"
+    color: "blue"
   },
   {
     id: 4,
@@ -34,7 +34,7 @@ let products = [
     price: 300,
     category: "laptop",
     url: "img/products/4.png",
-    color: "black"
+    color: "silver"
   },
   {
     id: 5,
@@ -42,7 +42,7 @@ let products = [
     price: 100,
     category: "phone",
     url: "img/products/5.png",
-    color: "black"
+    color: "gold"
   },
   {
     id: 6,
@@ -58,7 +58,7 @@ let products = [
     price: 290,
     category: "phone",
     url: "img/products/7.png",
-    color: "black"
+    color: "white"
   },
 
   {
@@ -71,11 +71,11 @@ let products = [
   },
   {
     id: 9,
-    name: "note 20 ultra",
+    name: "samsung buds",
     price: 30,
     category: "airpods",
     url: "img/products/10.png",
-    color: "black"
+    color: "white"
   },
   {
     id: 10,
@@ -83,11 +83,11 @@ let products = [
     price: 270,
     category: "phone",
     url: "img/products/8.png",
-    color: "black"
+    color: "blue"
   },
   {
     id: 11,
-    name: "note 20 ultra",
+    name: "mi buds ite",
     price: 40,
     category: "airpods",
     url: "img/products/12.png",
@@ -115,12 +115,14 @@ function content(product) {
                 <img src=${product.url} alt="" style="width: 100% ; height:200px" />
               </div>
               <div
-                class="content text-capitalize z-1 position-relative p-2 d-flex flex-column justify-content-center align-items-center"
+                class="content w-auto text-capitalize z-1 position-relative p-2 d-flex flex-column justify-content-center align-items-start"
               >
                 <h3 style="color: var(--dark)">${product.name}</h3>
-                <p style="color: var(--med)">price : $${product.price}</p>
+                <p style="color: var(--med)" class="m-0"><span class="fw-bold">category :</span> ${product.category}</p>
+                <p style="color: var(--med)" class="m-0"><span class="fw-bold">color :</span> ${product.color}</p>
+                <p style="color: var(--med)" class="m-0"><span class="fw-bold">price :</span> $${product.price}</p>
                 <button
-                  class="btn card-btn text-capitalize col-12 position-relative"
+                  class="btn card-btn text-capitalize col-12 position-relative mt-2"
                   data-id="${product.id}"
                   onclick="addToCart(${product.id}, this)"
                 >
@@ -152,6 +154,7 @@ fillProducts();
 let cartIcon = document.querySelector(".cart-icon");
 let viewCart = document.querySelector(".view-cart");
 var cartPopUp = document.querySelector(".cart-preview");
+let badge = document.querySelector(".badge");
 var addedItems = localStorage.getItem("productsInCart")
   ? JSON.parse(localStorage.getItem("productsInCart"))
   : [];
@@ -194,6 +197,7 @@ function fillInCart(product) {
 // Update cart preview
 function updateCart() {
   cartPopUp.innerHTML = "";
+  badge.innerHTML = addedItems.length;
   if (addedItems.length > 0) {
     addedItems.forEach((item) => {
       cartPopUp.innerHTML += fillInCart(item);
@@ -202,82 +206,6 @@ function updateCart() {
     cartPopUp.innerHTML = `<h5 class="text-capitalize text-center" style="color:var(--pop)">No items yet</h5>`;
   }
 }
-
-// function addToCart(id, buttonElement) {
-//   if (localStorage.getItem("userName")) {
-//     // Find chosen product
-//     let chosenItem = products.find((item) => item.id === id);
-
-//     // Update cart preview and localStorage
-//     cartPopUp.innerHTML += fillInCart(chosenItem);
-//     addedItems = [...addedItems, chosenItem];
-//     localStorage.setItem("productsInCart", JSON.stringify(addedItems));
-
-//     // Update button styles
-//     buttonElement.style.backgroundColor = "var(--pop)";
-//     buttonElement.innerHTML = "Added Successfully";
-//     buttonElement.disabled = true;
-//     buttonElement.style.border = "none";
-//     buttonElement.style.color = "var(--white)";
-
-//     // Save button state
-//     let buttonStates = JSON.parse(localStorage.getItem("buttonStates")) || {};
-//     buttonStates[id] = true; // Store the clicked state
-//     localStorage.setItem("buttonStates", JSON.stringify(buttonStates));
-//   } else {
-//     window.location = "login.html";
-//   }
-// }
-
-// function applyButtonStates() {
-//   const buttonStates = JSON.parse(localStorage.getItem("buttonStates")) || {};
-
-//   // Loop through all buttons with the `data-id` attribute
-//   document.querySelectorAll("button[data-id]").forEach((button) => {
-//     const id = button.getAttribute("data-id");
-
-//     if (buttonStates[id]) {
-//       // Apply saved state
-//       button.style.backgroundColor = "var(--pop)";
-//       button.innerHTML = "Added Successfully";
-//       button.disabled = true;
-//       button.style.border = "none";
-//       button.style.color = "var(--white)";
-//     }
-//   });
-// }
-
-// // Call this after rendering all products
-// applyButtonStates();
-
-// Fill products
-
-// ///////////////////////////////////////////////
-
-// Fill in cart
-// function fillInCart(product) {
-//   return `<!-- item in cart -->
-//                       <div class="d-flex justify-content-between p-2" data-id="${product.id}">
-//                         <div class="d-flex justify-content-center align-items-center ">
-//                           <img
-//                             src=${product.url}
-//                             alt=""
-//                             style="height: 70px"
-//                             class="me-2"
-//                           />
-//                           <div>
-//                             <h3 style="color: var(--dark);" class="item-title">${product.name}</h3>
-//                             <p style="color: var(--med);">$${product.price}</p>
-//                           </div>
-//                         </div>
-//                         <div class="d-flex justify-content-center align-items-center gap-2">
-//                           <button class="btn delete-btn" onclick="removeFromCart(${product.id})">Remove</button>
-//                         </div>
-//                       </div>
-//           <!-- item in cart -->`;
-// }
-
-
 
 // Add to cart
 function addToCart(id, buttonElement) {
@@ -343,3 +271,45 @@ function applyButtonStates() {
 // Initial calls
 updateCart();
 applyButtonStates();
+
+// /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// filter
+
+const searchInput = document.querySelector('input[type="search"]');
+const filterSelect = document.querySelector(".select-box");
+
+searchInput.addEventListener("input", handleSearch);
+filterSelect.addEventListener("change", handleSearch);
+
+function handleSearch() {
+  const query = searchInput.value.toLowerCase();
+  const filterBy = filterSelect.value; // category, color, or empty string for name
+
+  // Filter logic
+  const filteredProducts = products.filter((product) => {
+    if (!filterBy || filterBy === "name") {
+      return product.name.toLowerCase().includes(query);
+    } else if (filterBy === "category") {
+      return product.category.toLowerCase().includes(query);
+    } else if (filterBy === "color") {
+      return product.color.toLowerCase().includes(query);
+    }
+    return false;
+  });
+
+  // Update the product display
+  updateProductDisplay(filteredProducts);
+}
+
+function updateProductDisplay(filteredProducts) {
+  productParent.innerHTML = ""; // Clear existing products
+  filteredProducts.forEach((product) => {
+    productParent.innerHTML += content(product);
+  });
+}
+
+
+
+
+

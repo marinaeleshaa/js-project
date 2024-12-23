@@ -50,7 +50,7 @@
               ></p>
             </div>
             <!-- user name after login -->
-            <!-- Login & Sign Up -->
+            <!-- Login & Sign Up  & search-->
             <div class="ms-auto">
               <div class="d-flex gap-3 flex-column flex-lg-row">
                 <!-- search -->
@@ -61,34 +61,37 @@
                       name=""
                       id=""
                       class="rounded border-0 p-2 mt-4 mt-lg-0 flex-grow-1"
-                      placeholder="Search"
+                      placeholder="Search..."
                     />
                     <select
                       name=""
                       id=""
-                      class="ms-4 text-capitalize border-0 rounded mt-4 mt-lg-0"
+                      class="ms-4 text-capitalize border-0 rounded mt-4 mt-lg-0 select-box" 
                     >
                       <option value="" disabled selected hidden>
                         fillter by
                       </option>
-                      <option value="yes">category</option>
-                      <option value="no">color</option>
+                      <option value="name">name</option>
+                      <option value="category">category</option>
+                      <option value="color">color</option>
                     </select>
                   </div>
                 </div>
                 <!-- search -->
-                <div class="d-flex login-signUp gap-3">
-                  <a href="login.html">
-                    <button class="btn text-capitalize text-nowrap">
-                      login
-                    </button>
-                  </a>
-                  <a href="sign up.html">
-                    <button class="btn text-capitalize text-nowrap">
-                      sign up
-                    </button>
-                  </a>
-                </div>
+                 <!-- login & sign up -->
+                 <div class="d-flex login-signUp gap-3">
+                   <a href="login.html">
+                     <button class="btn text-capitalize text-nowrap">
+                       login
+                      </button>
+                    </a>
+                    <a href="sign up.html">
+                      <button class="btn text-capitalize text-nowrap">
+                        sign up
+                      </button>
+                    </a>
+                  </div>
+                  <!-- login & sign up -->
               </div>
             </div>
             <!-- After Login -->
@@ -98,8 +101,9 @@
             >
               <!-- cart -->
               <div class="position-relative after-login user-out">
-                <button type="button" class="cart-icon">
+                <button type="button" class="cart-icon position-relative">
                   <i class="fa-solid fa-cart-shopping fs-4"></i>
+                  <div class="badge rounded-circle position-absolute text-center">0</div>
                 </button>
                 <div class="position-absolute view-cart p-4 rounded">
                   <div class="w-100">
@@ -141,6 +145,7 @@
                   log out
                 </button>
               </a>
+              <!-- Log Out Button -->
             </div>
           </div>
         </div>
