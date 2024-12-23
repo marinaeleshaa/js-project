@@ -87,7 +87,7 @@ let products = [
   },
   {
     id: 11,
-    name: "mi buds ite",
+    name: "mi buds lite",
     price: 40,
     category: "airpods",
     url: "img/products/12.png",
@@ -170,31 +170,43 @@ cartIcon.addEventListener("click", () => {
     viewCart.style.pointerEvents = "none";
   }
 });
+
 function fillInCart(product) {
   return `<!-- item in cart -->
-                      <div class="d-flex justify-content-between p-2">
-                        <div class="d-flex justify-content-center align-items-center ">
-                          <img
-                            src=${product.url}
-                            alt=""
-                            style="height: 70px"
-                            class="me-2"
-                          />
-                          <div>
-                            <h3 style="color: var(--dark);" class="item-title">${product.name}</h3>
-                            <p style="color: var(--med);">$${product.price}</p>
-                          </div>
-                        </div>
-                        <div class="d-flex justify-content-center align-items-center gap-2">
-                          <button class="btn">+</button>
-                          <input type="number" max="5" min="0" class="text-center border-0" style="width: 40px;">
-                          <button class="btn delete-btn" onclick="removeFromCart(${product.id})">-</button>
-                        </div>
-                      </div>
-          <!-- item in cart -->`;
+    <div class="d-flex justify-content-between p-2 cart-item" data-id="${
+      product.id
+    }">
+      <div class="d-flex justify-content-center align-items-center">
+        <img src="${product.url}" alt="" style="height: 70px" class="me-2" />
+        <div>
+          <h3 style="color: var(--dark);" class="item-title">${
+            product.name
+          }</h3>
+          <p style="color: var(--med);">$${product.price}</p>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center align-items-center gap-2">
+        <button class="btn increment-btn">+</button>
+        <input type="number" max="5" min="0" value="${
+          product.quantity || 1
+        }" class="text-center border-0 quantity-input" style="width: 40px;">
+        <button class="btn decrement-btn">-</button>
+      </div>
+    </div>
+  <!-- item in cart -->`;
 }
-
 // Update cart preview
+// function updateCart() {
+//   cartPopUp.innerHTML = "";
+//   badge.innerHTML = addedItems.length;
+//   if (addedItems.length > 0) {
+//     addedItems.forEach((item) => {
+//       cartPopUp.innerHTML += fillInCart(item);
+//     });
+//   } else {
+//     cartPopUp.innerHTML = `<h5 class="text-capitalize text-center" style="color:var(--pop)">No items yet</h5>`;
+//   }
+// }
 function updateCart() {
   cartPopUp.innerHTML = "";
   badge.innerHTML = addedItems.length;
@@ -202,8 +214,54 @@ function updateCart() {
     addedItems.forEach((item) => {
       cartPopUp.innerHTML += fillInCart(item);
     });
+
+    // Attach event listeners to increment/decrement buttons
+    document.querySelectorAll(".increment-btn").forEach((btn) =>
+      btn.addEventListener("click", handleIncrement)
+    );
+    document.querySelectorAll(".decrement-btn").forEach((btn) =>
+      btn.addEventListener("click", handleDecrement)
+    );
   } else {
     cartPopUp.innerHTML = `<h5 class="text-capitalize text-center" style="color:var(--pop)">No items yet</h5>`;
+  }
+}
+
+function handleIncrement(e) {
+  const cartItem = e.target.closest(".cart-item");
+  const id = parseInt(cartItem.dataset.id, 10);
+  const quantityInput = cartItem.querySelector(".quantity-input");
+  let quantity = parseInt(quantityInput.value, 10);
+
+  if (quantity < 5) {
+    quantity += 1;
+    quantityInput.value = quantity;
+
+    // Update local storage
+    const product = addedItems.find((item) => item.id === id);
+    if (product) product.quantity = quantity;
+    localStorage.setItem("productsInCart", JSON.stringify(addedItems));
+  }
+}
+
+function handleDecrement(e) {
+  const cartItem = e.target.closest(".cart-item");
+  const id = parseInt(cartItem.dataset.id, 10);
+  const quantityInput = cartItem.querySelector(".quantity-input");
+  let quantity = parseInt(quantityInput.value, 10);
+
+  if (quantity > 0) {
+    quantity -= 1;
+    quantityInput.value = quantity;
+
+    // Update local storage
+    const product = addedItems.find((item) => item.id === id);
+    if (product) product.quantity = quantity;
+    localStorage.setItem("productsInCart", JSON.stringify(addedItems));
+  }
+
+  if (quantity===0){
+    removeFromCart(id)
   }
 }
 
@@ -308,8 +366,3 @@ function updateProductDisplay(filteredProducts) {
     productParent.innerHTML += content(product);
   });
 }
-
-
-
-
-
