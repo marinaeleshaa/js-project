@@ -196,17 +196,7 @@ function fillInCart(product) {
   <!-- item in cart -->`;
 }
 // Update cart preview
-// function updateCart() {
-//   cartPopUp.innerHTML = "";
-//   badge.innerHTML = addedItems.length;
-//   if (addedItems.length > 0) {
-//     addedItems.forEach((item) => {
-//       cartPopUp.innerHTML += fillInCart(item);
-//     });
-//   } else {
-//     cartPopUp.innerHTML = `<h5 class="text-capitalize text-center" style="color:var(--pop)">No items yet</h5>`;
-//   }
-// }
+
 function updateCart() {
   cartPopUp.innerHTML = "";
   badge.innerHTML = addedItems.length;
@@ -216,12 +206,12 @@ function updateCart() {
     });
 
     // Attach event listeners to increment/decrement buttons
-    document.querySelectorAll(".increment-btn").forEach((btn) =>
-      btn.addEventListener("click", handleIncrement)
-    );
-    document.querySelectorAll(".decrement-btn").forEach((btn) =>
-      btn.addEventListener("click", handleDecrement)
-    );
+    document
+      .querySelectorAll(".increment-btn")
+      .forEach((btn) => btn.addEventListener("click", handleIncrement));
+    document
+      .querySelectorAll(".decrement-btn")
+      .forEach((btn) => btn.addEventListener("click", handleDecrement));
   } else {
     cartPopUp.innerHTML = `<h5 class="text-capitalize text-center" style="color:var(--pop)">No items yet</h5>`;
   }
@@ -260,8 +250,8 @@ function handleDecrement(e) {
     localStorage.setItem("productsInCart", JSON.stringify(addedItems));
   }
 
-  if (quantity===0){
-    removeFromCart(id)
+  if (quantity === 0) {
+    removeFromCart(id);
   }
 }
 

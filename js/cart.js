@@ -61,7 +61,6 @@ function removeFromCart(id) {
     productCard.remove();
   }
 
-
   let buttonStates = JSON.parse(localStorage.getItem("buttonStates")) || {};
   delete buttonStates[id];
   localStorage.setItem("buttonStates", JSON.stringify(buttonStates));
