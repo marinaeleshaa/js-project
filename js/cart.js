@@ -60,6 +60,10 @@ function fillProducts() {
   addedItems.map((product) => {
     productParent.innerHTML += content(product);
   });
+
+  if (addedItems.length == 0) {
+    productParent.innerHTML =`<h3 class="text-capitalize text-center" style="color:var(--pop)">No items yet</h3>`;;
+  }
 }
 
 fillProducts();
@@ -71,61 +75,59 @@ document
   .querySelectorAll(".decrement-btn")
   .forEach((btn) => btn.addEventListener("click", handleDecrement));
 
-  function handleIncrement(e) {
-    const cartItem = e.target.closest(".item");
-    const id = parseInt(cartItem.dataset.id, 10);
-    const quantityInput = cartItem.querySelector(".quantity-input");
-    let quantity = parseInt(quantityInput.value, 10);
-  
-    if (quantity < 5) {
-      quantity += 1;
-      quantityInput.value = quantity;
-  
-      // Update the quantity in the local storage
-      const product = addedItems.find((item) => item.id === id);
-      if (product) {
-        product.quantity = quantity;
-      }
-      localStorage.setItem("productsInCart", JSON.stringify(addedItems));
-  
-      // Update quantity display
-      const quantityDisplay = cartItem.querySelector(".quantity-display");
-      if (quantityDisplay) {
-        quantityDisplay.textContent = quantity;
-      }
+function handleIncrement(e) {
+  const cartItem = e.target.closest(".item");
+  const id = parseInt(cartItem.dataset.id, 10);
+  const quantityInput = cartItem.querySelector(".quantity-input");
+  let quantity = parseInt(quantityInput.value, 10);
+
+  if (quantity < 5) {
+    quantity += 1;
+    quantityInput.value = quantity;
+
+    // Update the quantity in the local storage
+    const product = addedItems.find((item) => item.id === id);
+    if (product) {
+      product.quantity = quantity;
+    }
+    localStorage.setItem("productsInCart", JSON.stringify(addedItems));
+
+    // Update quantity display
+    const quantityDisplay = cartItem.querySelector(".quantity-display");
+    if (quantityDisplay) {
+      quantityDisplay.textContent = quantity;
     }
   }
-  
-  function handleDecrement(e) {
-    const cartItem = e.target.closest(".item");
-    const id = parseInt(cartItem.dataset.id, 10);
-    const quantityInput = cartItem.querySelector(".quantity-input");
-    let quantity = parseInt(quantityInput.value, 10);
-  
-    if (quantity > 0) {
-      quantity -= 1;
-      quantityInput.value = quantity;
-  
-      // Update the quantity in the local storage
-      const product = addedItems.find((item) => item.id === id);
-      if (product) {
-        product.quantity = quantity;
-      }
-      localStorage.setItem("productsInCart", JSON.stringify(addedItems));
-  
-      // Update quantity display
-      const quantityDisplay = cartItem.querySelector(".quantity-display");
-      if (quantityDisplay) {
-        quantityDisplay.textContent = quantity;
-      }
+}
+
+function handleDecrement(e) {
+  const cartItem = e.target.closest(".item");
+  const id = parseInt(cartItem.dataset.id, 10);
+  const quantityInput = cartItem.querySelector(".quantity-input");
+  let quantity = parseInt(quantityInput.value, 10);
+
+  if (quantity > 0) {
+    quantity -= 1;
+    quantityInput.value = quantity;
+
+    // Update the quantity in the local storage
+    const product = addedItems.find((item) => item.id === id);
+    if (product) {
+      product.quantity = quantity;
     }
-  
-    if (quantity === 0) {
-      removeFromCart(id);
+    localStorage.setItem("productsInCart", JSON.stringify(addedItems));
+
+    // Update quantity display
+    const quantityDisplay = cartItem.querySelector(".quantity-display");
+    if (quantityDisplay) {
+      quantityDisplay.textContent = quantity;
     }
   }
-  
-  
+
+  if (quantity === 0) {
+    removeFromCart(id);
+  }
+}
 
 // Remove from cart
 function removeFromCart(id) {
@@ -134,7 +136,9 @@ function removeFromCart(id) {
   localStorage.setItem("productsInCart", JSON.stringify(addedItems));
 
   // Select the card and remove it from the DOM
-  var removedCard = document.querySelector(`div[data-id="${id}"]`).closest(".item");
+  var removedCard = document
+    .querySelector(`div[data-id="${id}"]`)
+    .closest(".item");
   if (removedCard) {
     removedCard.remove();
   }
@@ -144,5 +148,3 @@ function removeFromCart(id) {
   delete buttonStates[id];
   localStorage.setItem("buttonStates", JSON.stringify(buttonStates));
 }
-
-
