@@ -190,7 +190,7 @@ function fillInCart(product) {
         <input type="number" max="5" min="0" value="${
           product.quantity || 1
         }" class="text-center border-0 quantity-input" style="width: 40px;">
-        <button class="btn decrement-btn">-</button>
+        <button class="btn decrement-btn" style="background-color: var(--pop);">-</button>
       </div>
     </div>
   <!-- item in cart -->`;
@@ -306,6 +306,7 @@ function applyButtonStates() {
 
     if (buttonStates[id]) {
       button.style.backgroundColor = "var(--pop)";
+      button.style.color = "var(--white)";
       button.innerHTML = "Added Successfully";
       button.disabled = true;
     } else {
