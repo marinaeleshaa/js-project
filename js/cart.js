@@ -98,6 +98,7 @@ function handleIncrement(e) {
       quantityDisplay.textContent = quantity;
     }
   }
+  getTotal()
 }
 
 function handleDecrement(e) {
@@ -127,6 +128,7 @@ function handleDecrement(e) {
   if (quantity === 0) {
     removeFromCart(id);
   }
+  getTotal()
 }
 
 // Remove from cart
@@ -150,3 +152,79 @@ function removeFromCart(id) {
 
   fillProducts()
 }
+
+
+// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// total cart
+
+let cartParent = document.querySelector(".short-cart")
+
+function fillShortCartContent(totalPrice){
+  let content = `<div
+                class="shadow p-4 rounded d-flex flex-column "
+                style="background-color: var(--white)"
+              >
+                <h3 class="text-capitalize" style="color: var(--dark)">
+                  cart totals
+                </h3>
+                <hr
+                  style="
+                    background-color: var(--med);
+                    width: 100%;
+                    height: 2px;
+                    border: none;
+                  "
+                />
+                <div class="d-flex flex-column p-2 text-capitalize">
+                  <div class="d-flex justify-content-between">
+                    <p style="color: var(--med)">shipping</p>
+                    <p style="color: var(--dark)">free</p>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <p style="color: var(--med)">tax</p>
+                    <p style="color: var(--dark)">$0</p>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <p style="color: var(--med)">subtotal</p>
+                    <p style="color: var(--dark)">${totalPrice}</p>
+                  </div>
+                </div>
+                <hr
+                  style="
+                    background-color: var(--dark);
+                    width: 100%;
+                    height: 2px;
+                    border: none;
+                    margin-top: 0px;
+                  "
+                />
+                <div class="d-flex justify-content-between px-3">
+                  <p style="color: var(--dark)" class="fs-3 text-capitalize">total</p>
+                  <p style="color: var(--dark)" class="fs-5">${totalPrice}</p>
+                </div>
+                <button class="btn mx-3"> process to check out</button>
+                <a href="index.html" class="m-auto text-capitalize mt-4" style="color: var(--med);"><i class="fa-solid fa-arrow-left me-2"></i> continue shopping </a>
+              </div>`
+    cartParent.innerHTML = content
+  }
+  
+  
+  function getTotal(){
+    let itemsInCart = JSON.parse(localStorage.getItem("productsInCart"))
+    let totalPrice=0
+    if(!itemsInCart){
+      return totalPrice =0
+    }else{
+      itemsInCart.map((item)=>{
+        if (!item.quantity){
+          return totalPrice += item.price
+        }else{
+          return totalPrice += Number(item.quantity) * Number(item.price)
+        }
+      })
+    }
+    fillShortCartContent(totalPrice)
+  }
+  
+  getTotal()
