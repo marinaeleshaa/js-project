@@ -187,7 +187,7 @@ function fillShortCartContent(totalPrice){
                   </div>
                   <div class="d-flex justify-content-between">
                     <p style="color: var(--med)">subtotal</p>
-                    <p style="color: var(--dark)">${totalPrice}</p>
+                    <p style="color: var(--dark)">$${totalPrice}</p>
                   </div>
                 </div>
                 <hr
@@ -201,7 +201,7 @@ function fillShortCartContent(totalPrice){
                 />
                 <div class="d-flex justify-content-between px-3">
                   <p style="color: var(--dark)" class="fs-3 text-capitalize">total</p>
-                  <p style="color: var(--dark)" class="fs-5">${totalPrice}</p>
+                  <p style="color: var(--dark)" class="fs-5">$${totalPrice}</p>
                 </div>
                 <button class="btn mx-3"> process to check out</button>
                 <a href="index.html" class="m-auto text-capitalize mt-4" style="color: var(--med);"><i class="fa-solid fa-arrow-left me-2"></i> continue shopping </a>
@@ -228,3 +228,9 @@ function fillShortCartContent(totalPrice){
   }
   
   getTotal()
+
+  // ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  // // favorite products
+
+  

@@ -2,6 +2,10 @@
 
 var productParent = document.querySelector(".product-parent");
 
+let favItem = localStorage.getItem("favProduct")
+  ? JSON.parse(localStorage.getItem("favProduct"))
+  : [];
+
 let products = [
   {
     id: 1,
@@ -106,39 +110,87 @@ let products = [
 function content(product) {
   let content = `<!-- product item -->
           <div class="col-10 col-md-5 col-lg-4 col-xl-3 p-3">
-            <div
-              class="card product-item position-relative overflow-hidden p-3 shadow border-0"
-            >
-              <div
-                class="img z-1 d-flex justify-content-center align-items-center position-relative h-100"
-              >
-                <img src=${product.url} alt="" style="width: 100% ; height:200px" />
+            <div class="card product-item position-relative overflow-hidden p-3 shadow border-0">
+              <div class="img z-1 d-flex justify-content-center align-items-center position-relative h-100">
+                <img src=${product.url} alt="" style="width: 100%; height:200px" />
               </div>
-              <div
-                class="content w-auto text-capitalize z-1 position-relative p-2 d-flex flex-column justify-content-center align-items-start"
-              >
+              <div class="content w-auto text-capitalize z-1 position-relative p-2 d-flex flex-column justify-content-center align-items-start">
                 <h3 style="color: var(--dark)">${product.name}</h3>
                 <p style="color: var(--med)" class="m-0"><span class="fw-bold">category :</span> ${product.category}</p>
                 <p style="color: var(--med)" class="m-0"><span class="fw-bold">color :</span> ${product.color}</p>
                 <p style="color: var(--med)" class="m-0"><span class="fw-bold">price :</span> $${product.price}</p>
-                <button
-                  class="btn card-btn text-capitalize col-12 position-relative mt-2"
-                  data-id="${product.id}"
-                  onclick="addToCart(${product.id}, this)"
-                >
+                <button class="btn card-btn text-capitalize col-12 position-relative mt-2" data-id="${product.id}" onclick="addToCart(${product.id}, this)">
                   Add to Cart
                 </button>
-
               </div>
               <div class="fav-icon position-absolute me-3 fs-1">
-                <i class="fa-regular fa-heart icon"></i>
-                <!-- <i class="fa-solid fa-heart"></i> -->
+                <i class="fa-heart icon" data-id="${product.id}" onclick="addToFav(${product.id}, this)"></i>
               </div>
             </div>
           </div>
           <!-- product item -->`;
   return content;
 }
+
+// Add product to favorites or remove it
+function addToFav(id, button) {
+  let chosenItem = products.find((item) => item.id === id);
+
+  // Retrieve the stored favorite button states
+  let favBtn = JSON.parse(localStorage.getItem("favBtn")) || {};
+
+  if (!button.classList.contains("favorite")) {
+    // Add the "favorite" class
+    button.classList.add("favorite");
+    button.classList.add("fa-solid");
+
+    // Update the state in localStorage (set to true for this product ID)
+    favBtn[id] = true;
+    localStorage.setItem("favBtn", JSON.stringify(favBtn));
+
+    // Add the chosen item to the favorites list
+    let favItem = JSON.parse(localStorage.getItem("favProduct")) || [];
+    favItem.push(chosenItem);
+    localStorage.setItem("favProduct", JSON.stringify(favItem));
+  } else {
+    // Remove the "favorite" class
+    button.classList.remove("favorite");
+
+    // Update the state in localStorage (set to false for this product ID)
+    favBtn[id] = false;
+    button.classList.add("fa-solid");
+    localStorage.setItem("favBtn", JSON.stringify(favBtn));
+
+    // Remove the chosen item from the favorites list
+    let favItem = JSON.parse(localStorage.getItem("favProduct")) || [];
+    favItem = favItem.filter((item) => item.id !== id); // Remove item from the array
+    localStorage.setItem("favProduct", JSON.stringify(favItem));
+  }
+}
+
+// Apply the favorite state from localStorage to the button
+function updateFavBtn(button, id) {
+  let favBtn = JSON.parse(localStorage.getItem("favBtn")) || {};
+
+  if (favBtn[id]) {
+    button.classList.add("favorite"); // Apply the "favorite" class if the product is in favorites
+    button.classList.add("fa-solid");
+  } else {
+    button.classList.remove("favorite"); // Ensure the class is removed if it's not a favorite
+    button.classList.add("fa-solid");
+  }
+}
+
+// Initialize button states when the page loads
+window.addEventListener("DOMContentLoaded", function () {
+  const favButtons = document.querySelectorAll(".icon"); // Select all buttons
+
+  // Loop through all buttons and apply their stored state
+  favButtons.forEach((button) => {
+    const id = parseInt(button.dataset.id, 10); // Assume button has a data-id attribute for the product id
+    updateFavBtn(button, id); // Apply the correct state to each button
+  });
+});
 
 function fillProducts() {
   productParent.innerHTML = "";
