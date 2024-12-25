@@ -38,13 +38,15 @@ header {
 }
 
 .logout-btn,
-.delete-btn {
+.delete-btn,
+.remove-btn {
   background-color: var(--pop);
   color: var(--white);
 }
 
 .logout-btn:hover,
-.delete-btn:hover {
+.delete-btn:hover,
+.remove-btn:hover {
   color: var(--white);
   background-color: var(--pop);
   transform: scale(1.1);
@@ -263,3 +265,39 @@ select:focus {
 .favorite {
   color: var(--pop) !important;
 }
+
+/* ///////////////////////////////////////////////////////////////////////////////////////////////// */
+.fav-parent {
+  background-color: var(--white);
+}
+.fav-parent {
+  -ms-overflow-style: none; /* For IE */
+  scrollbar-width: none; /* For Firefox */
+  list-style-type: none;
+}
+
+.fav-parent::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and newer Opera versions */
+}
+
+.fav-line {
+  width: 20%;
+  height: 3px;
+  background-color: var(--pop);
+  animation-name: fav-line;
+  animation-duration: 2s;
+  margin: 10px auto;
+  animation-fill-mode: both;
+  transition: 1s;
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  -ms-transition: 1s;
+  -o-transition: 1s;
+}
+
+.fav-head:hover .fav-line {
+  width: 100%;
+
+}
+
+

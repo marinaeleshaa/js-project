@@ -2,10 +2,6 @@
 
 var productParent = document.querySelector(".product-parent");
 
-let favItem = localStorage.getItem("favProduct")
-  ? JSON.parse(localStorage.getItem("favProduct"))
-  : [];
-
 let products = [
   {
     id: 1,
@@ -132,6 +128,24 @@ function content(product) {
   return content;
 }
 
+// ///////////////////////////////////////////////////////////////////////////////////
+// // fill Products
+function fillProducts() {
+  productParent.innerHTML = "";
+  products.map((product) => {
+    productParent.innerHTML += content(product);
+  });
+}
+
+fillProducts();
+
+// ///////////////////////////////////////////////////////////////////////////////////////
+
+// // favorite
+let favItems = localStorage.getItem("favProduct")
+  ? JSON.parse(localStorage.getItem("favProduct"))
+  : [];
+
 // Add product to favorites or remove it
 function addToFav(id, button) {
   let chosenItem = products.find((item) => item.id === id);
@@ -149,9 +163,9 @@ function addToFav(id, button) {
     localStorage.setItem("favBtn", JSON.stringify(favBtn));
 
     // Add the chosen item to the favorites list
-    let favItem = JSON.parse(localStorage.getItem("favProduct")) || [];
-    favItem.push(chosenItem);
-    localStorage.setItem("favProduct", JSON.stringify(favItem));
+    let favItems = JSON.parse(localStorage.getItem("favProduct")) || [];
+    favItems.push(chosenItem);
+    localStorage.setItem("favProduct", JSON.stringify(favItems));
   } else {
     // Remove the "favorite" class
     button.classList.remove("favorite");
@@ -162,9 +176,9 @@ function addToFav(id, button) {
     localStorage.setItem("favBtn", JSON.stringify(favBtn));
 
     // Remove the chosen item from the favorites list
-    let favItem = JSON.parse(localStorage.getItem("favProduct")) || [];
-    favItem = favItem.filter((item) => item.id !== id); // Remove item from the array
-    localStorage.setItem("favProduct", JSON.stringify(favItem));
+    let favItems = JSON.parse(localStorage.getItem("favProduct")) || [];
+    favItems = favItems.filter((item) => item.id !== id); // Remove item from the array
+    localStorage.setItem("favProduct", JSON.stringify(favItems));
   }
 }
 
@@ -192,16 +206,10 @@ window.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-function fillProducts() {
-  productParent.innerHTML = "";
-  products.map((product) => {
-    productParent.innerHTML += content(product);
-  });
-}
 
-fillProducts();
+// // //////////////////////////////////////////////////////////////////////////////////////////////
 
-// // ///////////////////////////////////////////////
+// cart
 
 let cartIcon = document.querySelector(".cart-icon");
 let viewCart = document.querySelector(".view-cart");
@@ -375,7 +383,7 @@ applyButtonStates();
 
 // /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// filter
+// search
 
 const searchInput = document.querySelector('input[type="search"]');
 const filterSelect = document.querySelector(".select-box");

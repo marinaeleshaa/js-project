@@ -62,7 +62,7 @@ function fillProducts() {
   });
 
   if (addedItems.length == 0) {
-    productParent.innerHTML =`<h3 class="text-capitalize text-center" style="color:var(--pop)">No items yet</h3>`;;
+    productParent.innerHTML = `<h3 class="text-capitalize text-center" style="color:var(--pop)">No items yet</h3>`;
   }
 }
 
@@ -98,7 +98,7 @@ function handleIncrement(e) {
       quantityDisplay.textContent = quantity;
     }
   }
-  getTotal()
+  getTotal();
 }
 
 function handleDecrement(e) {
@@ -128,7 +128,8 @@ function handleDecrement(e) {
   if (quantity === 0) {
     removeFromCart(id);
   }
-  getTotal()
+  getTotal();
+  applyButtonStates();
 }
 
 // Remove from cart
@@ -150,17 +151,16 @@ function removeFromCart(id) {
   delete buttonStates[id];
   localStorage.setItem("buttonStates", JSON.stringify(buttonStates));
 
-  fillProducts()
+  fillProducts();
 }
-
 
 // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // total cart
 
-let cartParent = document.querySelector(".short-cart")
+let cartParent = document.querySelector(".short-cart");
 
-function fillShortCartContent(totalPrice){
+function fillShortCartContent(totalPrice) {
   let content = `<div
                 class="shadow p-4 rounded d-flex flex-column "
                 style="background-color: var(--white)"
@@ -205,32 +205,264 @@ function fillShortCartContent(totalPrice){
                 </div>
                 <button class="btn mx-3"> process to check out</button>
                 <a href="index.html" class="m-auto text-capitalize mt-4" style="color: var(--med);"><i class="fa-solid fa-arrow-left me-2"></i> continue shopping </a>
-              </div>`
-    cartParent.innerHTML = content
+              </div>`;
+  cartParent.innerHTML = content;
+}
+
+function getTotal() {
+  let itemsInCart = JSON.parse(localStorage.getItem("productsInCart"));
+  let totalPrice = 0;
+  if (!itemsInCart) {
+    return (totalPrice = 0);
+  } else {
+    itemsInCart.map((item) => {
+      if (!item.quantity) {
+        return (totalPrice += item.price);
+      } else {
+        return (totalPrice += Number(item.quantity) * Number(item.price));
+      }
+    });
   }
-  
-  
-  function getTotal(){
-    let itemsInCart = JSON.parse(localStorage.getItem("productsInCart"))
-    let totalPrice=0
-    if(!itemsInCart){
-      return totalPrice =0
-    }else{
-      itemsInCart.map((item)=>{
-        if (!item.quantity){
-          return totalPrice += item.price
-        }else{
-          return totalPrice += Number(item.quantity) * Number(item.price)
-        }
-      })
+  fillShortCartContent(totalPrice);
+}
+
+getTotal();
+
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// // favorite products
+let favParent = document.querySelector(".fav-parent");
+let favItems = localStorage.getItem("favProduct")
+  ? JSON.parse(localStorage.getItem("favProduct"))
+  : [];
+let products = [
+  {
+    id: 1,
+    name: "HP laptop",
+    price: 180,
+    category: "laptop",
+    url: "img/products/2.png",
+    color: "silver"
+  },
+
+  {
+    id: 2,
+    name: "airpods lite",
+    price: 50,
+    category: "airpods",
+    url: "img/products/11.png",
+    color: "pink"
+  },
+  {
+    id: 3,
+    name: "iphone 14 pro max",
+    price: 370,
+    category: "phone",
+    url: "img/products/6.png",
+    color: "blue"
+  },
+  {
+    id: 4,
+    name: "apple laptop",
+    price: 300,
+    category: "laptop",
+    url: "img/products/4.png",
+    color: "silver"
+  },
+  {
+    id: 5,
+    name: "iphone xs max",
+    price: 100,
+    category: "phone",
+    url: "img/products/5.png",
+    color: "gold"
+  },
+  {
+    id: 6,
+    name: "dell laptop",
+    price: 200,
+    category: "laptop",
+    url: "img/products/1.png",
+    color: "black"
+  },
+  {
+    id: 7,
+    name: "iphone 13 pro max",
+    price: 290,
+    category: "phone",
+    url: "img/products/7.png",
+    color: "white"
+  },
+
+  {
+    id: 8,
+    name: "note 20 ultra",
+    price: 250,
+    category: "phone",
+    url: "img/products/9.png",
+    color: "black"
+  },
+  {
+    id: 9,
+    name: "samsung buds",
+    price: 30,
+    category: "airpods",
+    url: "img/products/10.png",
+    color: "white"
+  },
+  {
+    id: 10,
+    name: "iphone 13",
+    price: 270,
+    category: "phone",
+    url: "img/products/8.png",
+    color: "blue"
+  },
+  {
+    id: 11,
+    name: "mi buds lite",
+    price: 40,
+    category: "airpods",
+    url: "img/products/12.png",
+    color: "black"
+  },
+  {
+    id: 12,
+    name: "acer laptop",
+    price: 250,
+    category: "laptop",
+    url: "img/products/3.png",
+    color: "black"
+  }
+];
+
+function favContent(product) {
+  let content = `  <!-- item -->
+              <li class="col-8 col-md-5 col-lg-4 col-xl-3">
+                <div class="p-3">
+                  <div
+                    class="card product-item position-relative overflow-hidden p-3 shadow border-0"
+                    style="height:430px"
+                  >
+                    <div
+                      class="img z-1 d-flex justify-content-center align-items-center position-relative h-100"
+                    >
+                      <img
+                        src="${product.url}"
+                        alt=""
+                        style="width: 100%; height: 200px"
+                      />
+                    </div>
+                    <div
+                      class="content w-auto text-capitalize z-1 position-relative p-2 d-flex flex-column justify-content-center align-items-start"
+                    >
+                      <h3 style="color: var(--dark)">${product.name}</h3>
+                      <p style="color: var(--med)" class="m-0">
+                        <span class="fw-bold">category :</span>
+                        ${product.category}
+                      </p>
+                      <p style="color: var(--med)" class="m-0">
+                        <span class="fw-bold">color :</span> ${product.color}
+                      </p>
+                      <p style="color: var(--med)" class="m-0">
+                        <span class="fw-bold">price :</span> $${product.price}
+                      </p>
+                      <div class="d-flex justify-content-between w-100 gap-2">
+                        <button
+                        class="btn card-btn text-capitalize col-8  position-relative mt-2 p-2 text-nowrap "
+                        data-add-id="${product.id}"
+                        onClick="addToCart(${product.id}, this)"
+                      >
+                        Add to Cart
+                      </button>
+                        <button
+                        class=" remove-btn btn card-btn text-capitalize col-4 position-relative mt-2 p-2"
+                        data-id="${product.id}"
+                        onClick="removeFromFav(${product.id}, this)"
+                      >
+                        remove
+                      </button>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!-- item -->`;
+  return content;
+}
+
+function fillFavItem() {
+  favParent.innerHTML = "";
+  favItems.map((item) => {
+    favParent.innerHTML += favContent(item);
+  });
+}
+fillFavItem();
+
+// Remove from favorites
+function removeFromFav(id, button) {
+  // Find the parent `<li>` element of the button and remove it
+  const itemElement = button.closest("li");
+  if (itemElement) {
+    itemElement.remove(); // Remove the item from the DOM
+  }
+
+  // Update the favorites list in localStorage
+  let favItems = JSON.parse(localStorage.getItem("favProduct")) || [];
+  favItems = favItems.filter((item) => item.id !== id); // Remove item from the array
+  localStorage.setItem("favProduct", JSON.stringify(favItems));
+
+  // Update the state in localStorage for the "favBtn"
+  let favBtn = JSON.parse(localStorage.getItem("favBtn")) || {};
+  favBtn[id] = false; // Set the state for this ID to false
+  localStorage.setItem("favBtn", JSON.stringify(favBtn));
+}
+
+// Add to cart
+// Add to cart
+function addToCart(id, buttonElement) {
+  let chosenItem = products.find((item) => item.id === id);
+
+  if (!addedItems.some((item) => item.id === id)) {
+    addedItems = [...addedItems, chosenItem];
+    localStorage.setItem("productsInCart", JSON.stringify(addedItems));
+
+    // Update the button style and save the state
+    buttonElement.style.backgroundColor = "var(--pop)";
+    buttonElement.style.color = "var(--white)";
+    buttonElement.innerHTML = "Added Successfully";
+    buttonElement.disabled = true;
+
+    let buttonStates = JSON.parse(localStorage.getItem("buttonStates")) || {};
+    buttonStates[id] = true; // Save the state for this button ID
+    localStorage.setItem("buttonStates", JSON.stringify(buttonStates));
+  }
+  fillProducts();
+}
+
+// Apply button states
+function applyButtonStates() {
+  const buttonStates = JSON.parse(localStorage.getItem("buttonStates")) || {};
+
+  // Only target "Add to Cart" buttons with class "card-btn" and a valid data-id
+  document.querySelectorAll(".card-btn[data-add-id]").forEach((button) => {
+    const id = button.getAttribute("data-add-id");
+
+    // Apply saved styles if the button state exists
+    if (buttonStates[id]) {
+      button.style.backgroundColor = "var(--pop)";
+      button.style.color = "var(--white)";
+      button.innerHTML = "Added Successfully";
+      button.disabled = true;
+    } else {
+      // Reset styles for buttons not marked as added
+      button.style.backgroundColor = "";
+      button.style.color = "";
+      button.innerHTML = "Add to Cart";
+      button.disabled = false;
     }
-    fillShortCartContent(totalPrice)
-  }
-  
-  getTotal()
+  });
+}
 
-  // ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  // // favorite products
-
-  
+applyButtonStates();

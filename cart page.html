@@ -149,6 +149,7 @@
             <!-- product item -->
           </div>
           <!-- product parent -->
+          <div class="d-none d-lg-inline-block" style="background-color: var(--white); width: 3px; "></div>
           <!-- check out  -->
           <div class="col-12 col-lg-3">
             <div class="container p-0 mt-5 mt-lg-0 short-cart">
@@ -205,8 +206,66 @@
     </section>
     <!-- cart items -->
 
-      <!-- fav item -->
-      <!-- fav item -->
+    <!-- fav item -->
+    <section>
+      <div class="container fav-head">
+        <div class="shadow">
+          <div
+            class="text-center p-3 text-capitalize"
+            style="background-color: var(--white); color: var(--dark)"
+          >
+            <div class="m-auto" style="width: fit-content">
+              <h2 class="m-auto px-5" style="width: fit-content">favorites</h2>
+              <div class="fav-line" style=""></div>
+            </div>
+          </div>
+          <ul class="d-flex gap-3 overflow-scroll fav-parent rounded p-3">
+            <!-- item -->
+            <li class="col-3">
+              <div class="p-3">
+                <div
+                  class="card product-item position-relative overflow-hidden p-3 shadow border-0"
+                >
+                  <div
+                    class="img z-1 d-flex justify-content-center align-items-center position-relative h-100"
+                  >
+                    <img
+                      src="${product.url}"
+                      alt=""
+                      style="width: 100%; height: 200px"
+                    />
+                  </div>
+                  <div
+                    class="content w-auto text-capitalize z-1 position-relative p-2 d-flex flex-column justify-content-center align-items-start"
+                  >
+                    <h3 style="color: var(--dark)">${product.name}</h3>
+                    <p style="color: var(--med)" class="m-0">
+                      <span class="fw-bold">category :</span>
+                      ${product.category}
+                    </p>
+                    <p style="color: var(--med)" class="m-0">
+                      <span class="fw-bold">color :</span> ${product.color}
+                    </p>
+                    <p style="color: var(--med)" class="m-0">
+                      <span class="fw-bold">price :</span> $${product.price}
+                    </p>
+                    <button
+                      class="btn card-btn text-capitalize col-12 position-relative mt-2"
+                      data-id="${product.id}"
+                      onclick="addToCart(${product.id}, this)"
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- item -->
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!-- fav item -->
 
     <script src="js/all.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
