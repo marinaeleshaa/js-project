@@ -338,7 +338,7 @@ let products = [
 
 function favContent(product) {
   let content = `  <!-- item -->
-              <li class="col-8 col-md-5 col-lg-4 col-xl-3">
+              <li class="col-11 col-md-5 col-lg-4 col-xl-3">
                 <div class="p-3">
                   <div
                     class="card product-item position-relative overflow-hidden p-3 shadow border-0"
@@ -376,7 +376,7 @@ function favContent(product) {
                         Add to Cart
                       </button>
                         <button
-                        class=" remove-btn btn card-btn text-capitalize col-4 position-relative mt-2 p-2"
+                        class=" remove-btn btn card-btn text-capitalize col-4 position-relative mt-2 p-2 text-nowrap"
                         data-id="${product.id}"
                         onClick="removeFromFav(${product.id}, this)"
                       >
