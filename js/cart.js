@@ -47,6 +47,13 @@ function content(product) {
             <button class="btn decrement-btn" data-id="${
               product.id
             }" style="background-color: var(--pop);">-</button>
+            <button 
+            class="btn "
+            style="background-color: var(--pop);"
+            onClick="removeFromCart(${product.id})"
+            >
+              <i class="fa-solid fa-trash"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -107,7 +114,7 @@ function handleDecrement(e) {
   const quantityInput = cartItem.querySelector(".quantity-input");
   let quantity = parseInt(quantityInput.value, 10);
 
-  if (quantity > 0) {
+  if (quantity > 1) {
     quantity -= 1;
     quantityInput.value = quantity;
 
@@ -125,9 +132,6 @@ function handleDecrement(e) {
     }
   }
 
-  if (quantity === 0) {
-    removeFromCart(id);
-  }
   getTotal();
   applyButtonStates();
 }
@@ -152,6 +156,7 @@ function removeFromCart(id) {
   localStorage.setItem("buttonStates", JSON.stringify(buttonStates));
 
   fillProducts();
+  applyButtonStates();
 }
 
 // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -439,6 +444,7 @@ function addToCart(id, buttonElement) {
     localStorage.setItem("buttonStates", JSON.stringify(buttonStates));
   }
   fillProducts();
+  getTotal();
 }
 
 // Apply button states
